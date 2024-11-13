@@ -8,7 +8,7 @@ import com.example.aiphotohunter.screens.hunt.HuntViewModel
 @Composable
 fun HandleBackPressToHome(navController: NavHostController, huntViewModel: HuntViewModel) {
     BackHandler {
-        //huntViewModel.reset()
+        huntViewModel.reset()
         navController.popBackStack(Screen.Home.route, inclusive = false)
     }
 }

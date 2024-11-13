@@ -24,14 +24,14 @@ fun NavGraph(huntViewModel: HuntViewModel, predictionViewModel: PredictionViewMo
         startDestination = Screen.Home.route
     ) {
         composable(Screen.Home.route) { HomeScreen(navController = navController, huntViewModel) }
-        /*composable(Screen.Loading.route) { HuntLoadingScreen(navController = navController, huntViewModel = huntViewModel) }
+        composable(Screen.Loading.route) { HuntLoadingScreen(navController = navController, huntViewModel = huntViewModel) }
         composable(Screen.Loaded.route) { HuntPhotoLoadedScreen(navController = navController, huntViewModel = huntViewModel) }
         composable(Screen.Pending.route) { HuntItemPendingScreen(navController = navController, huntViewModel = huntViewModel, predictionViewModel = predictionViewModel) }
         composable(Screen.Finish.route) { HuntFinishScreen(navController = navController, huntViewModel) }
         composable(Screen.ItemValidating.route) { HuntItemValidatingScreen(navController = navController, huntViewModel = huntViewModel, predictionViewModel = predictionViewModel) }
         composable(Screen.ItemValidationSuccess.route) { HuntItemValidationSuccessScreen(navController = navController, huntViewModel = huntViewModel, predictionViewModel = predictionViewModel) }
         composable(Screen.ItemValidationFailure.route) { HuntItemValidationFailureScreen(navController = navController, huntViewModel = huntViewModel, predictionViewModel = predictionViewModel) }
-        composable(Screen.HuntError.route) { HuntErrorScreen(navController = navController, huntViewModel = huntViewModel) } */
+        composable(Screen.HuntError.route) { HuntErrorScreen(navController = navController, huntViewModel = huntViewModel) }
     }
 }
 

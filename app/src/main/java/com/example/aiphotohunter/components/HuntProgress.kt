@@ -14,7 +14,7 @@ import com.example.aiphotohunter.screens.hunt.HuntViewModel
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HuntProgress(huntViewModel: HuntViewModel) {
-    /* val itemsLeft = huntViewModel.itemsLeft.collectAsState()
+    val itemsLeft = huntViewModel.itemsLeft.collectAsState()
     val score = huntViewModel.score.collectAsState()
     val totalItems = huntViewModel.currentItems.value.size
 
@@ -30,5 +30,5 @@ fun HuntProgress(huntViewModel: HuntViewModel) {
             text = "${score.value}/${totalItems * 50}",
             style = MaterialTheme.typography.titleSmall
         )
-    } */
+    }
 }
