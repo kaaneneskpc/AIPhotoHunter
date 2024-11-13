@@ -10,7 +10,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,8 +36,16 @@ fun HuntItemValidationSuccessScreen(
 
     HandleBackPressToHome(navController, huntViewModel)
 
-    val itemCount = huntViewModel.itemsLeft.collectAsState()
+    val itemCount by huntViewModel.itemsLeft.collectAsState()
     val reward = 50
+
+    LaunchedEffect(itemCount) {
+        if (itemCount == 0) {
+            navController.navigate(Screen.Finish.route) {
+                popUpTo(Screen.Finish.route) { inclusive = true }
+            }
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -71,22 +81,15 @@ fun HuntItemValidationSuccessScreen(
             )
         }
 
-        if (itemCount.value == 0) {
-            Button(onClick = { navController.navigate(Screen.Finish.route) }) {
-                Text(text = "End your hunt")
-            }
-        } else {
-            Button(onClick = {
-                huntViewModel.setScore(reward)
-                huntViewModel.incrementCorrectAnswers()
-                predictionViewModel.resetPrediction()
-                huntViewModel.pickNextItem()
-                navController.navigate(Screen.Pending.route)
-            }) {
-                Text(text = "Next item")
-            }
+        Button(onClick = {
+            huntViewModel.setScore(reward)
+            huntViewModel.incrementCorrectAnswers()
+            predictionViewModel.resetPrediction()
+            huntViewModel.pickNextItem()
+            navController.navigate(Screen.Pending.route)
+        }) {
+            Text(text = "Next item")
         }
-
         Spacer(modifier = Modifier.height(35.dp))
     }
 }

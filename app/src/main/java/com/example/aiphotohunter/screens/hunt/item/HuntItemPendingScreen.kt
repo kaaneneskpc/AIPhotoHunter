@@ -121,7 +121,6 @@ fun HuntItemPendingScreen(
             Spacer(modifier = Modifier.height(50.dp))
         } else {
 
-
             Spacer(modifier = Modifier.height(15.dp))
 
             HuntProgress(huntViewModel)
