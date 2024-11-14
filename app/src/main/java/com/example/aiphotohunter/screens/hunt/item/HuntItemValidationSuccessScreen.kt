@@ -37,7 +37,10 @@ fun HuntItemValidationSuccessScreen(
     HandleBackPressToHome(navController, huntViewModel)
 
     val itemCount by huntViewModel.itemsLeft.collectAsState()
-    val reward = 50
+    val successEmoji by huntViewModel.successEmoji.collectAsState()
+    val foundItText by huntViewModel.foundItText.collectAsState()
+    val rewardText by huntViewModel.rewardText.collectAsState()
+    val nextItemButtonText by huntViewModel.nextItemButtonText.collectAsState()
 
     LaunchedEffect(itemCount) {
         if (itemCount == 0) {
@@ -63,17 +66,17 @@ fun HuntItemValidationSuccessScreen(
             horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
-            Text(text = "🤩", style = MaterialTheme.typography.displayLarge)
+            Text(text = successEmoji, style = MaterialTheme.typography.displayLarge)
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "You found it!",
+                text = foundItText,
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "+$reward",
+                text = rewardText,
                 style = MaterialTheme.typography.displayMedium.copy(
                     color = Color.Green,
                     fontWeight = FontWeight.W800
@@ -82,13 +85,13 @@ fun HuntItemValidationSuccessScreen(
         }
 
         Button(onClick = {
-            huntViewModel.setScore(reward)
+            huntViewModel.applyReward()
             huntViewModel.incrementCorrectAnswers()
             predictionViewModel.resetPrediction()
             huntViewModel.pickNextItem()
             navController.navigate(Screen.Pending.route)
         }) {
-            Text(text = "Next item")
+            Text(text = nextItemButtonText)
         }
         Spacer(modifier = Modifier.height(35.dp))
     }

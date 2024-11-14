@@ -16,8 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +37,11 @@ fun HuntItemValidationFailureScreen(
     predictionViewModel: PredictionViewModel
 ) {
     val itemCount by huntViewModel.itemsLeft.collectAsState()
+    val failureEmoji by huntViewModel.failureEmoji.collectAsState()
+    val skipButtonText by huntViewModel.skipButtonText.collectAsState()
+    val shouldRetry = predictionViewModel.shouldRetry()
+    val failureMessage = huntViewModel.getFailureMessage(shouldRetry)
+    val retryButtonText = huntViewModel.getRetryButtonText(shouldRetry)
 
     LaunchedEffect(itemCount) {
         if (itemCount == 0) {
@@ -48,8 +51,6 @@ fun HuntItemValidationFailureScreen(
         }
     }
     HandleBackPressToHome(navController, huntViewModel)
-
-    val retryCount = remember { mutableStateOf(predictionViewModel.shouldRetry()) }
 
     Column(
         modifier = Modifier
@@ -67,16 +68,12 @@ fun HuntItemValidationFailureScreen(
             horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
-            Text(text = "🫠", style = MaterialTheme.typography.displayLarge)
+            Text(text = failureEmoji, style = MaterialTheme.typography.displayLarge)
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = if (retryCount.value) {
-                    "Nope, doesn't look like it."
-                } else {
-                    "Nope, doesn't look like it. You've reached your retry limit. Moving to the next item."
-                },
+                text = failureMessage,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W500),
                 textAlign = TextAlign.Center
             )
@@ -91,13 +88,13 @@ fun HuntItemValidationFailureScreen(
                 predictionViewModel.resetRetryCount()
                 navController.navigate(Screen.Pending.route)
             }) {
-                Text(text = "Skip")
+                Text(text = skipButtonText)
             }
 
             Spacer(modifier = Modifier.width(8.dp))
 
             Button(onClick = {
-                if (retryCount.value) {
+                if (shouldRetry) {
                     predictionViewModel.incrementRetryCount()
                     predictionViewModel.resetPrediction()
                     navController.navigate(Screen.Pending.route)
@@ -107,7 +104,7 @@ fun HuntItemValidationFailureScreen(
                     navController.navigate(Screen.Pending.route)
                 }
             }) {
-                Text(text = if (retryCount.value) "Try again" else "Next")
+                Text(text = retryButtonText)
             }
         }
         Spacer(modifier = Modifier.height(35.dp))

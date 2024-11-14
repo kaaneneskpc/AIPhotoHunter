@@ -11,6 +11,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +28,10 @@ fun HuntPhotoLoadedScreen(navController: NavHostController, huntViewModel: HuntV
 
     HandleBackPressToHome(navController, huntViewModel)
 
+    val readyText by huntViewModel.readyText.collectAsState()
+    val bringItOnText by huntViewModel.bringItOnText.collectAsState()
+    val readyEmoji by huntViewModel.readyEmoji.collectAsState()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +44,7 @@ fun HuntPhotoLoadedScreen(navController: NavHostController, huntViewModel: HuntV
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "🤖", style = MaterialTheme.typography.displayLarge.copy(
+                text = readyEmoji, style = MaterialTheme.typography.displayLarge.copy(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             )
@@ -46,7 +52,7 @@ fun HuntPhotoLoadedScreen(navController: NavHostController, huntViewModel: HuntV
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Your hunt is ready!",
+                text = readyText,
                 style = MaterialTheme.typography.titleLarge
             )
 
@@ -59,7 +65,7 @@ fun HuntPhotoLoadedScreen(navController: NavHostController, huntViewModel: HuntV
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 35.dp)
         ) {
-            Text(text = "Bring it on!")
+            Text(text = bringItOnText)
         }
     }
 }

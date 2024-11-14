@@ -1,5 +1,9 @@
 package com.example.aiphotohunter.screens.hunt.item
 
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
+import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
@@ -7,19 +11,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -49,24 +52,41 @@ fun HuntItemPendingScreen(
     huntViewModel: HuntViewModel,
     predictionViewModel: PredictionViewModel
 ) {
-
+    val context = LocalContext.current
     HandleBackPressToHome(navController, huntViewModel)
+    val selectedLanguage by huntViewModel.selectedLanguage.collectAsState()
+    val isLoading by huntViewModel.isLoading.collectAsState()
+    val galleryIconDescription by huntViewModel.galleryIconDescription.collectAsState()
+    val nextItemText by huntViewModel.nextItemText.collectAsState()
+    val noItemText by huntViewModel.noItemText.collectAsState()
+    val skipButtonText by huntViewModel.skipButtonText.collectAsState()
+    val takePhotoButtonText by huntViewModel.takePhotoButtonText.collectAsState()
+    val currentItem by huntViewModel.currentItem.collectAsState()
+
+    val galleryLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let {
+            val bitmap = if (Build.VERSION.SDK_INT < 28) {
+                MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
+            } else {
+                val source = ImageDecoder.createSource(context.contentResolver, uri)
+                ImageDecoder.decodeBitmap(source)
+            }
+
+            predictionViewModel.setCapturedImage(bitmap)
+            predictionViewModel.predictImageName(selectedLanguage = selectedLanguage ?: "English")
+            navController.navigate(Screen.ItemValidating.route)
+        }
+    }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.TakePicturePreview()
     ) { bitmap ->
         predictionViewModel.setCapturedImage(bitmap)
-        predictionViewModel.predictImageName()
+        predictionViewModel.predictImageName(selectedLanguage = selectedLanguage ?: "English")
         navController.navigate(Screen.ItemValidating.route)
     }
-
-    var expanded by remember { mutableStateOf(false) }
-    val languages = listOf("English", "Türkçe")
-    val selectedLanguage = huntViewModel.selectedLanguage.collectAsState()
-    val isLoading = huntViewModel.isLoading.collectAsState()
-
-
-    val currentItem = huntViewModel.currentItem.collectAsState()
 
     LaunchedEffect(huntViewModel) {
         huntViewModel.onFinished = {
@@ -83,91 +103,73 @@ fun HuntItemPendingScreen(
 
         Spacer(modifier = Modifier.height(15.dp))
 
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
+
+
+        Spacer(modifier = Modifier.height(15.dp))
+
+        HuntProgress(huntViewModel)
+
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+
         ) {
-            OutlinedTextField(
-                value = selectedLanguage.value ?: "Select Language",
-                onValueChange = { /* No-op since it's read-only */ },
-                readOnly = true,
-                label = { Text("Language") },
-                trailingIcon = {
-                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                },
-                modifier = Modifier
-                    .menuAnchor() // Important for anchoring the dropdown
-                    .fillMaxWidth()
+            Text(
+                text = nextItemText,
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Medium
+                )
             )
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                languages.forEach { language ->
-                    DropdownMenuItem(
-                        text = { Text(text = language) },
-                        onClick = {
-                            huntViewModel.setSelectedLanguage(language)
-                            expanded = false
-                        }
-                    )
-                }
-            }
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = currentItem ?: noItemText,
+                style = MaterialTheme.typography.displayLarge.copy(
+                    fontSize = 35.sp,
+                    fontWeight = FontWeight.W800
+                )
+            )
         }
 
-        if (isLoading.value) {
-            Spacer(modifier = Modifier.height(50.dp))
-            CircularProgressIndicator()
-            Spacer(modifier = Modifier.height(50.dp))
-        } else {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            OutlinedButton(onClick = { huntViewModel.pickNextItem() }) {
+                Text(text = skipButtonText)
+            }
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.width(8.dp))
 
-            HuntProgress(huntViewModel)
+            Button(onClick = { launcher.launch(null) }) {
+                Text(text = takePhotoButtonText)
+            }
 
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+            Spacer(modifier = Modifier.width(8.dp))
 
+            Button(
+                onClick = { galleryLauncher.launch("image/*") },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                ),
+                modifier = Modifier.width(100.dp),
+                enabled = !isLoading
             ) {
-                Text(
-                    text = "Next item to find:",
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-                Text(
-                    text = currentItem.value ?: "No item",
-                    style = MaterialTheme.typography.displayLarge.copy(
-                        fontSize = 35.sp,
-                        fontWeight = FontWeight.W800
-                    )
+                Icon(
+                    imageVector = Icons.Default.PhotoLibrary,
+                    contentDescription = galleryIconDescription,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
 
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                OutlinedButton(onClick = { huntViewModel.pickNextItem() }) {
-                    Text(text = "Skip")
-                }
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Button(onClick = { launcher.launch(null) }) {
-                    Text(text = "Take photo")
-                }
-            }
-
-            Spacer(modifier = Modifier.height(35.dp))
-
         }
+
+        Spacer(modifier = Modifier.height(35.dp))
+
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

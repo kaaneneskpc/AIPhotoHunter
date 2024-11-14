@@ -11,6 +11,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +27,9 @@ fun HuntErrorScreen(
     navController: NavHostController,
     huntViewModel: HuntViewModel
 ) {
+    val errorEmoji by huntViewModel.errorEmoji.collectAsState()
+    val errorMessage by huntViewModel.errorMessage.collectAsState()
+    val tryAgainText by huntViewModel.tryAgainText.collectAsState()
 
     Box(
         modifier = Modifier
@@ -38,7 +43,7 @@ fun HuntErrorScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "🫠", style = MaterialTheme.typography.displayLarge.copy(
+                text = errorEmoji, style = MaterialTheme.typography.displayLarge.copy(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             )
@@ -46,7 +51,7 @@ fun HuntErrorScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "AI decided to take a break...",
+                text = errorMessage,
                 style = MaterialTheme.typography.titleLarge
             )
 
@@ -64,7 +69,7 @@ fun HuntErrorScreen(
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 35.dp)
         ) {
-            Text(text = "Try again")
+            Text(text = tryAgainText)
         }
     }
 }

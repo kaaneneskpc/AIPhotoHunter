@@ -1,6 +1,5 @@
 package com.example.aiphotohunter.screens.hunt.view
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,11 +29,12 @@ fun HuntLoadingScreen(navController: NavHostController, huntViewModel: HuntViewM
 
     HandleBackPressToHome(navController, huntViewModel)
 
-    val items = huntViewModel.currentItems.collectAsState()
+    val items by huntViewModel.currentItems.collectAsState()
+    val loadingEmoji by huntViewModel.loadingEmoji.collectAsState()
+    val loadingMessage by huntViewModel.loadingMessage.collectAsState()
 
-    LaunchedEffect(items.value) {
-        if (items.value.isNotEmpty()) {
-            Log.d("HuntLoadingScreen", "Items generated, navigating to Loaded screen")
+    LaunchedEffect(items) {
+        if (items.isNotEmpty()) {
             navController.navigate(Screen.Loaded.route)
         }
     }
@@ -50,7 +51,7 @@ fun HuntLoadingScreen(navController: NavHostController, huntViewModel: HuntViewM
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "🤖", style = MaterialTheme.typography.displayLarge.copy(
+                text = loadingEmoji, style = MaterialTheme.typography.displayLarge.copy(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             )
@@ -58,7 +59,7 @@ fun HuntLoadingScreen(navController: NavHostController, huntViewModel: HuntViewM
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "AI is preparing your hunt...",
+                text = loadingMessage,
                 style = MaterialTheme.typography.titleLarge
             )
 

@@ -30,10 +30,13 @@ import com.example.aiphotohunter.screens.hunt.HuntViewModel
 fun HuntFinishScreen(navController: NavHostController, huntViewModel: HuntViewModel) {
     HandleBackPressToHome(navController, huntViewModel)
 
-    val score = huntViewModel.score.collectAsState()
-    val correctAnswers by huntViewModel.correctAnswers.collectAsState()
-    val totalQuestions = 10
-    val winPercentage = correctAnswers.toFloat() / totalQuestions.toFloat()
+    val winPercentage by huntViewModel.winPercentage.collectAsState()
+    val winRatePercentage by huntViewModel.winRatePercentage.collectAsState()
+    val finishText by huntViewModel.finishText.collectAsState()
+    val yourScoreText by huntViewModel.yourScoreText.collectAsState()
+    val winRateText by huntViewModel.winRateText.collectAsState()
+    val playAgainText by huntViewModel.playAgainText.collectAsState()
+    val emoji by huntViewModel.emoji.collectAsState()
 
     Box(
         modifier = Modifier
@@ -47,7 +50,7 @@ fun HuntFinishScreen(navController: NavHostController, huntViewModel: HuntViewMo
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "🤠", style = MaterialTheme.typography.displayLarge.copy(
+                text = emoji, style = MaterialTheme.typography.displayLarge.copy(
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 65.sp
                 )
@@ -61,25 +64,25 @@ fun HuntFinishScreen(navController: NavHostController, huntViewModel: HuntViewMo
 
             ) {
                 Text(
-                    text = "The hunt is over!",
+                    text = finishText,
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Medium)
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
-                    text = "Your score: ${score.value}",
+                    text = yourScoreText,
                     style = MaterialTheme.typography.displaySmall.copy(
                         fontWeight = FontWeight.W600
                     )
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Win Rate:",
+                    text = winRateText,
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 CircularProgressBar(
                     percentage = winPercentage,
-                    number = (winPercentage * 100).toInt()
+                    number = winRatePercentage
                 )
             }
 
@@ -97,7 +100,7 @@ fun HuntFinishScreen(navController: NavHostController, huntViewModel: HuntViewMo
                 .align(Alignment.BottomCenter)
                 .padding(bottom = 35.dp)
         ) {
-            Text(text = "Play again")
+            Text(text = playAgainText)
         }
     }
 }
@@ -108,6 +111,8 @@ fun HuntFinishScreenPreview() {
     val navController = rememberNavController()
     val huntViewModel = HuntViewModel().apply {
         _score.value = 350
+        _correctAnswers.value = 10
+        setSelectedLanguage("Türkçe")
     }
     HuntFinishScreen(navController, huntViewModel)
 }

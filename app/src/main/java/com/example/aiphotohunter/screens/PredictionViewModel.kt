@@ -43,7 +43,7 @@ class PredictionViewModel @Inject constructor() : ViewModel() {
         return retryCount < maxRetries
     }
 
-    fun predictImageName() {
+    fun predictImageName(selectedLanguage: String) {
         viewModelScope.launch {
             try {
                 val bitmap = _capturedImage.value
@@ -53,24 +53,36 @@ class PredictionViewModel @Inject constructor() : ViewModel() {
                         apiKey = BuildConfig.apiKey
                     )
 
+                    val prompt = when (selectedLanguage) {
+                        "Türkçe" -> "Bu resimdeki öğenin tek kelimelik adını verin."
+                        else -> "Provide a single-word name for the item in this image."
+                    }
+
                     val inputContent = content {
                         image(bitmap)
-                        text("Provide a single-word name for the item in this image.")
+                        text(prompt)
                     }
 
                     val response = generativeModel.generateContent(inputContent)
-                    val predictedName =
-                        response.text?.split(" ")?.firstOrNull()?.replace(Regex("[^A-Za-z]"), "")
-                            ?: "Prediction failed"
+                    val regex = when (selectedLanguage) {
+                        "Türkçe" -> "[^A-Za-zĞÜŞİÖÇğüşiöç]"
+                        else -> "[^A-Za-z]"
+                    }
+
+                    val predictedName = response.text
+                        ?.split(" ")
+                        ?.firstOrNull()
+                        ?.replace(Regex(regex), "")
+                        ?: if (selectedLanguage == "Türkçe") "Tahmin başarısız oldu" else "Prediction failed"
 
                     _predictedName.value = predictedName
                     Log.d("PredictionViewModel", "Predicted name: $predictedName")
                 } else {
-                    _predictedName.value = "No image available"
+                    _predictedName.value = if (selectedLanguage == "Türkçe") "Kullanılabilir resim yok" else "No image available"
                 }
             } catch (e: Exception) {
                 Log.e("PredictionViewModel", "Error predicting image name", e)
-                _predictedName.value = "Prediction failed"
+                _predictedName.value = if (selectedLanguage == "Türkçe") "Tahmin başarısız oldu" else "Prediction failed"
             }
         }
     }
