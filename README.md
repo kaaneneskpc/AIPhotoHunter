@@ -10,6 +10,7 @@ AI Photo Hunter is an innovative mobile app that allows users to go photo huntin
 <li><strong>Location-Based Discovery:</strong> You can hunt for photos with different location options such as home and outdoors.</li>
 <li><strong>Real-Time Upload Indicator:</strong> The app provides a visual feedback to the user while the data is loading.</li>
 <li><strong>User Friendly Interface:</strong> Easy to use with a modern and intuitive design.</li>
+<li><strong>Gallery Photo Import:</strong> Instead of taking photos for analysis, you can add photos from the gallery.</li>
 <li><strong>AI-Powered Photo Analysis:</strong> Taken photos are analyzed and evaluated by artificial intelligence.</li>
 <li><strong>Sharing and Social Interaction:</strong> You can share your photos with the community and see what other users have shared.</li>
 
