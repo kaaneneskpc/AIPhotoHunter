@@ -203,3 +203,12 @@ You can follow these photos for applying the key to your project:
     <img width="100%" src="https://github.com/user-attachments/assets/22fc2c51-0be7-4cce-859a-4fe3ef0df456"> 
 </p>
 
+# Acknowledegments
+<a href="https://aistudio.google.com/apikey">Google AI Studio</a> for providing AI prompt key
+Jetpack Compose for the modern UI toolkit.
+
+# Contact
+For questions or suggestions, feel free to reach out:
+
+<li>Email: <a href="mailto:kaaneneskpc1@gmail.com">Kaan Enes KAPICI</a></li>
+<li>GitHub: <a href="https://www.github.com/kaaneneskpc">kaaneneskpc</a></li>
