@@ -11,11 +11,9 @@ AI Photo Hunter is an innovative mobile app that allows users to go photo huntin
 
 
 ### Turkish
-<img src="https://github.com/user-attachments/assets/eb79d566-ee13-4fbb-b463-0fe821b68ceb" height = "400px"/><img src="https://github.com/user-attachments/assets/8258b9b8-451e-4f53-958c-b39ed1f51a0f" height = "400px"/><img src="https://github.com/user-attachments/assets/ca630ed1-84fb-42b9-8662-fec8877b43ee" height = "400px"/><img src="https://github.com/user-attachments/assets/042f883f-4476-448e-8d22-0d907b1a6ca1" height = "400px"/><img src="https://github.com/user-attachments/assets/9ab163e9-c33c-4ad9-a264-b3ea58673c32" height = "400px"/><img src="https://github.com/user-attachments/assets/33ade1b8-86f3-447a-b226-78e70d0e1f14" height = "400px"/><img src="https://github.com/user-attachments/assets/b3f7803b-1a25-4abb-8a9e-d35078602473" height = "400px"/>
+<img src="https://github.com/user-attachments/assets/eb79d566-ee13-4fbb-b463-0fe821b68ceb" height = "400px"/><img src="https://github.com/user-attachments/assets/8258b9b8-451e-4f53-958c-b39ed1f51a0f" height = "400px"/><img src="https://github.com/user-attachments/assets/ca630ed1-84fb-42b9-8662-fec8877b43ee" height = "400px"/><img src="https://github.com/user-attachments/assets/042f883f-4476-448e-8d22-0d907b1a6ca1" height = "400px"/><img src="https://github.com/user-attachments/assets/25a7b717-99e1-418a-9017-859afe93fcfa" height = "400px"/><img src="https://github.com/user-attachments/assets/33ade1b8-86f3-447a-b226-78e70d0e1f14" height = "400px"/><img src="https://github.com/user-attachments/assets/6fd5f80b-bf9d-48ac-9fdd-a1b5212c962a" height = "400px"/>
 
 </br>
-![WhatsApp Image 2024-11-15 at 18 00 18](https://github.com/user-attachments/assets/33ade1b8-86f3-447a-b226-78e70d0e1f14)
-
 
 ## Features
 
