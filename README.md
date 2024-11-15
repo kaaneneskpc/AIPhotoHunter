@@ -4,6 +4,21 @@ AI Photo Hunter is an innovative mobile app that allows users to go photo huntin
 
 </br>
 
+## App Contents
+### English
+
+| --------- | ------ | ------ |
+|<img src="https://github.com/user-attachments/assets/6ad87077-9e40-4ffe-ada4-464955219b01" height = "600px"/>|<img src="https://github.com/user-attachments/assets/02d2ae58-e64f-4e73-8698-a46b3ed77ffb" height = "600px"/>|<img src="https://github.com/user-attachments/assets/2c8121e3-d818-4bc2-b1d9-450661c63dcf" height = "600px"/>|<img src="https://github.com/user-attachments/assets/6a182057-c79c-430a-978f-30d1444eceeb" height = "600px"/>|<img src="https://github.com/user-attachments/assets/9ab163e9-c33c-4ad9-a264-b3ea58673c32" height = "600px"/>|<img src="https://github.com/user-attachments/assets/6ede46bd-f7e3-4e82-9efe-1a2f7eba777d" height = "600px"/>|<img src="https://github.com/user-attachments/assets/b3f7803b-1a25-4abb-8a9e-d35078602473" height = "600px"/>|<img src="https://github.com/user-attachments/assets/b3f7803b-1a25-4abb-8a9e-d35078602473" height = "600px"/>|<img src="https://github.com/user-attachments/assets/2b5506ae-abde-4dfd-bcc0-ca45ced6e174" height = "600px"/>|<img src="https://github.com/user-attachments/assets/fb874f12-7744-426d-8106-ffbc13c45454" height = "600px"/>|
+
+
+### Turkish
+| Bottom Sheet Picker | Dialog Picker | Custom Picker |
+| --------- | ------ | ------ |
+|<img src="https://github.com/user-attachments/assets/6f4197a3-4236-4222-9603-e89688f7c532" height = "300px"/>|<img src="https://github.com/user-attachments/assets/d5b14324-1509-4f69-b99e-e0f1665ed62d" height = "300px"/>|<img src="https://github.com/user-attachments/assets/842684a3-7d15-4f1d-9cfa-d23590d03d26" height = "300px"/>|
+
+
+</br>
+
 ## Features
 
 <li><strong>Multi-Language Support:</strong> Users can use the app in their own language.</li>
