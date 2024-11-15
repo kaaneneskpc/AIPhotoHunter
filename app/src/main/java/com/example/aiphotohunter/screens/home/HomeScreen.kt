@@ -2,6 +2,7 @@ package com.example.aiphotohunter.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,7 +28,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,104 +57,112 @@ fun HomeScreen(navController: NavHostController, huntViewModel: HuntViewModel) {
     val startHuntingButtonText by huntViewModel.startHuntingButtonText.collectAsState()
     val logoDescription by huntViewModel.logoDescription.collectAsState()
 
-    if (isLoading) {
-        Spacer(modifier = Modifier.height(50.dp))
-        CircularProgressIndicator()
-        Spacer(modifier = Modifier.height(50.dp))
-    } else {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(25.dp))
-            ExposedDropdownMenuBox(
-                expanded = expanded,
-                onExpandedChange = { expanded = !expanded }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.image),
+            contentDescription = "Arka Plan",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        if (isLoading) {
+            Spacer(modifier = Modifier.height(50.dp))
+            CircularProgressIndicator()
+            Spacer(modifier = Modifier.height(50.dp))
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                OutlinedTextField(
-                    value = selectedLanguage ?: selectLanguagePlaceholder,
-                    onValueChange = { /* No-op since it's read-only */ },
-                    readOnly = true,
-                    label = { Text(languageLabel) },
-                    trailingIcon = {
-                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                    },
-                    modifier = Modifier
-                        .menuAnchor()
-                        .fillMaxWidth()
-                )
-                ExposedDropdownMenu(
+                Spacer(modifier = Modifier.height(25.dp))
+                ExposedDropdownMenuBox(
                     expanded = expanded,
-                    onDismissRequest = { expanded = false }
+                    onExpandedChange = { expanded = !expanded }
                 ) {
-                    languages.forEach { language ->
-                        DropdownMenuItem(
-                            text = { Text(text = language) },
-                            onClick = {
-                                huntViewModel.setSelectedLanguage(language)
-                                expanded = false
-                            }
-                        )
+                    OutlinedTextField(
+                        value = selectedLanguage ?: selectLanguagePlaceholder,
+                        onValueChange = { /* No-op since it's read-only */ },
+                        readOnly = true,
+                        label = { Text(languageLabel, fontWeight = FontWeight.Bold) },
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                        },
+                        modifier = Modifier
+                            .menuAnchor()
+                            .fillMaxWidth()
+                    )
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        languages.forEach { language ->
+                            DropdownMenuItem(
+                                text = { Text(text = language) },
+                                onClick = {
+                                    huntViewModel.setSelectedLanguage(language)
+                                    expanded = false
+                                }
+                            )
+                        }
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(25.dp))
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = logoDescription,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-            )
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            Text(
-                text = locationPrompt,
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontSize = 20.sp,
-                    fontWeight = MaterialTheme.typography.bodyLarge.fontWeight
+                Spacer(modifier = Modifier.height(25.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.logo),
+                    contentDescription = logoDescription,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
                 )
-            )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 16.dp),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                LocationCard(
-                    icon = "🏠",
-                    title = homeTitle,
-                    selected = selectedButton.value == "Home",
-                    onTap = { selectedButton.value = "Home" },
-                    modifier = Modifier.weight(1f)
+                Spacer(modifier = Modifier.height(32.dp))
+
+                Text(
+                    text = locationPrompt,
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontSize = 20.sp,
+                        fontWeight = MaterialTheme.typography.bodyLarge.fontWeight
+                    )
                 )
-                Spacer(modifier = Modifier.width(3.dp))
-                LocationCard(
-                    icon = "🌳",
-                    title = outsideTitle,
-                    selected = selectedButton.value == "Outside",
-                    onTap = { selectedButton.value = "Outside" },
-                    modifier = Modifier.weight(1f)
-                )
-            }
 
-            Spacer(modifier = Modifier.weight(1f))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp, horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    LocationCard(
+                        icon = "🏠",
+                        title = homeTitle,
+                        selected = selectedButton.value == "Home",
+                        onTap = { selectedButton.value = "Home" },
+                        modifier = Modifier.weight(1f)
+                    )
+                    Spacer(modifier = Modifier.width(3.dp))
+                    LocationCard(
+                        icon = "🌳",
+                        title = outsideTitle,
+                        selected = selectedButton.value == "Outside",
+                        onTap = { selectedButton.value = "Outside" },
+                        modifier = Modifier.weight(1f)
+                    )
+                }
 
-            Button(
-                onClick = {
-                    huntViewModel.selectLocation(selectedButton.value.trim())
-                    navController.navigate(Screen.Loading.route)
-                },
-                enabled = selectedButton.value.isNotEmpty(),
-                modifier = Modifier
-                    .padding(bottom = 32.dp)
-            ) {
-                Text(text = startHuntingButtonText)
+                Spacer(modifier = Modifier.weight(1f))
+
+                Button(
+                    onClick = {
+                        huntViewModel.selectLocation(selectedButton.value.trim())
+                        navController.navigate(Screen.Loading.route)
+                    },
+                    enabled = selectedButton.value.isNotEmpty(),
+                    modifier = Modifier
+                        .padding(bottom = 32.dp)
+                ) {
+                    Text(text = startHuntingButtonText)
+                }
             }
         }
     }

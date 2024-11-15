@@ -53,17 +53,14 @@ class HuntViewModel @Inject constructor() : ViewModel() {
         if (lang == "Türkçe") "Av bitti!" else "The hunt is over!"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "The hunt is over!")
 
-    // Computed property for yourScoreText
     val yourScoreText: StateFlow<String> = combine(selectedLanguage, score) { lang, scoreValue ->
         if (lang == "Türkçe") "Skorun: $scoreValue" else "Your score: $scoreValue"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Your score: 0")
 
-    // Computed property for winRateText
     val winRateText: StateFlow<String> = selectedLanguage.map { lang ->
         if (lang == "Türkçe") "Başarı Oranı:" else "Win Rate:"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Win Rate:")
 
-    // Computed property for playAgainText
     val playAgainText: StateFlow<String> = selectedLanguage.map { lang ->
         if (lang == "Türkçe") "Tekrar oyna" else "Play again"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Play again")
@@ -72,7 +69,6 @@ class HuntViewModel @Inject constructor() : ViewModel() {
         correct.toFloat() / totalQuestions.toFloat()
     }.stateIn(viewModelScope, SharingStarted.Eagerly, 0f)
 
-    // Computed property for winRatePercentage
     val winRatePercentage: StateFlow<Int> = winPercentage.map { percentage ->
         (percentage * 100).toInt()
     }.stateIn(viewModelScope, SharingStarted.Eagerly, 0)
@@ -95,7 +91,6 @@ class HuntViewModel @Inject constructor() : ViewModel() {
     val galleryIconDescription: StateFlow<String> = selectedLanguage.map { lang ->
         if (lang == "Türkçe") "Galeriden fotoğraf seç" else "Select photo from gallery"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Select photo from gallery")
-
 
     val languageLabel: StateFlow<String> = selectedLanguage.map { lang ->
         if (lang == "Türkçe") "Dil" else "Language"
@@ -126,11 +121,6 @@ class HuntViewModel @Inject constructor() : ViewModel() {
         if (lang == "Türkçe") "Fotoğraf çek" else "Take photo"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Take photo")
 
-
-    val galleryButtonText: StateFlow<String> = selectedLanguage.map { lang ->
-        if (lang == "Türkçe") "Galeriden seç" else "Select from gallery"
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, "Select from gallery")
-
     val readyText: StateFlow<String> = selectedLanguage.map { lang ->
         if (lang == "Türkçe") "Avınız hazır!" else "Your hunt is ready!"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Your hunt is ready!")
@@ -146,7 +136,7 @@ class HuntViewModel @Inject constructor() : ViewModel() {
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "🤖")
 
 
-    val successEmoji: StateFlow<String> = selectedLanguage.map { lang ->
+    val successEmoji: StateFlow<String> = selectedLanguage.map {
         "🤩"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "🤩")
 
@@ -165,7 +155,7 @@ class HuntViewModel @Inject constructor() : ViewModel() {
         if (lang == "Türkçe") "Sonraki öğe" else "Next item"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Next item")
 
-    val failureEmoji: StateFlow<String> = selectedLanguage.map { lang ->
+    val failureEmoji: StateFlow<String> = selectedLanguage.map {
         "🫠"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "🫠")
 
@@ -178,7 +168,7 @@ class HuntViewModel @Inject constructor() : ViewModel() {
             }
         }.stateIn(viewModelScope, SharingStarted.Eagerly, "Items left: 0")
 
-    val errorEmoji: StateFlow<String> = selectedLanguage.map { lang ->
+    val errorEmoji: StateFlow<String> = selectedLanguage.map {
         "🫠"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "🫠")
 
@@ -192,8 +182,8 @@ class HuntViewModel @Inject constructor() : ViewModel() {
         if (lang == "Türkçe") "Tekrar dene" else "Try again"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Try again")
 
-    val loadingEmoji: StateFlow<String> = selectedLanguage.map { lang ->
-        "🤖" // You can customize this based on language or other state if needed
+    val loadingEmoji: StateFlow<String> = selectedLanguage.map {
+        "🤖"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "🤖")
 
     val loadingMessage: StateFlow<String> = selectedLanguage.map { lang ->
@@ -223,6 +213,10 @@ class HuntViewModel @Inject constructor() : ViewModel() {
     val locationPrompt: StateFlow<String> = selectedLanguage.map { lang ->
         if (lang == "Türkçe") "Avlanma konumunuzu seçin" else "Choose your hunting location"
     }.stateIn(viewModelScope, SharingStarted.Eagerly, "Choose your hunting location")
+
+    val shareResultText: StateFlow<String> = selectedLanguage.map { lang ->
+        if (lang == "Türkçe") "Sonucu Paylaş" else "Share Result"
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, "Share Result")
 
 
     val scoreText: StateFlow<String> =

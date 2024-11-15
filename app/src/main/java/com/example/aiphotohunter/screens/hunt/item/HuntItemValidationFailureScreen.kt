@@ -1,6 +1,8 @@
 package com.example.aiphotohunter.screens.hunt.item
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,12 +20,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.aiphotohunter.R
 import com.example.aiphotohunter.components.HuntProgress
 import com.example.aiphotohunter.navigation.HandleBackPressToHome
 import com.example.aiphotohunter.navigation.Screen
@@ -52,62 +57,71 @@ fun HuntItemValidationFailureScreen(
     }
     HandleBackPressToHome(navController, huntViewModel)
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(modifier = Modifier.height(15.dp))
-
-        HuntProgress(huntViewModel)
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.image),
+            contentDescription = "Arka Plan",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
 
         Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = failureEmoji, style = MaterialTheme.typography.displayLarge)
+            Spacer(modifier = Modifier.height(15.dp))
 
-            Spacer(modifier = Modifier.height(16.dp))
+            HuntProgress(huntViewModel)
 
-            Text(
-                text = failureMessage,
-                style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W500),
-                textAlign = TextAlign.Center
-            )
-        }
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
 
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            OutlinedButton(onClick = {
-                huntViewModel.pickNextItem()
-                predictionViewModel.resetRetryCount()
-                navController.navigate(Screen.Pending.route)
-            }) {
-                Text(text = skipButtonText)
+            ) {
+                Text(text = failureEmoji, style = MaterialTheme.typography.displayLarge)
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = failureMessage,
+                    style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.W500),
+                    textAlign = TextAlign.Center
+                )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
-
-            Button(onClick = {
-                if (shouldRetry) {
-                    predictionViewModel.incrementRetryCount()
-                    predictionViewModel.resetPrediction()
-                    navController.navigate(Screen.Pending.route)
-                } else {
-                    predictionViewModel.resetRetryCount()
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                OutlinedButton(onClick = {
                     huntViewModel.pickNextItem()
+                    predictionViewModel.resetRetryCount()
                     navController.navigate(Screen.Pending.route)
+                }) {
+                    Text(text = skipButtonText)
                 }
-            }) {
-                Text(text = retryButtonText)
+
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Button(onClick = {
+                    if (shouldRetry) {
+                        predictionViewModel.incrementRetryCount()
+                        predictionViewModel.resetPrediction()
+                        navController.navigate(Screen.Pending.route)
+                    } else {
+                        predictionViewModel.resetRetryCount()
+                        huntViewModel.pickNextItem()
+                        navController.navigate(Screen.Pending.route)
+                    }
+                }) {
+                    Text(text = retryButtonText)
+                }
             }
+            Spacer(modifier = Modifier.height(35.dp))
         }
-        Spacer(modifier = Modifier.height(35.dp))
     }
 }
 
