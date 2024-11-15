@@ -2,9 +2,10 @@
 
 AI Photo Hunter is an innovative mobile app that allows users to go photo hunting. Thanks to its AI-powered features, users can explore interesting places around them, take photos and share them with other users. The app appeals to a wide audience with its user-friendly interface and multi-language support.
 
-<br>
+</br>
 
 ## Features
+
 <li><strong>Multi-Language Support:</strong> Users can use the app in their own language.</li>
 <li><strong>Location-Based Discovery:</strong> You can hunt for photos with different location options such as home and outdoors.</li>
 <li><strong>Real-Time Upload Indicator:</strong> The app provides a visual feedback to the user while the data is loading.</li>
@@ -12,13 +13,23 @@ AI Photo Hunter is an innovative mobile app that allows users to go photo huntin
 <li><strong>AI-Powered Photo Analysis:</strong> Taken photos are analyzed and evaluated by artificial intelligence.</li>
 <li><strong>Sharing and Social Interaction:</strong> You can share your photos with the community and see what other users have shared.</li>
 
-<br>
+</br>
+
+# Techs
+
+<li><strong>Kotlin:</strong> A modern and secure programming language for Android app development.</li>
+<li><strong>Jetpack Compose:</strong>  Declarative UI development library.</li>
+<li><strong>MVVM (Model-View-ViewModel):</strong>  A flexible and scalable structure for application architecture.</li>
+<li><strong>Navigation Component:</strong>  Structural component that facilitates navigation within the application.</li>
+<li><strong>Material Design 3:</strong>  Modern and aesthetic user interface designs.</li>
+
+</br>
 
 ## Installation
 
 Clone the repository
 ```kotlin
-git clone https://github.com/kaaneneskpc/VideoCallWithStreamSDK.git
+git clone https://github.com/kaaneneskpc/AIPhotoHunter.git
 ```
 Open In Android Studio, Click on File > Open and select the cloned project directory.
 
@@ -78,7 +89,7 @@ hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndro
 jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ```
-<br>
+</br>
 
 Add the dependency to your `build.gradle.kts` file:
 
@@ -164,3 +175,5 @@ dependencies {
 }
 
 ```
+
+</br>
