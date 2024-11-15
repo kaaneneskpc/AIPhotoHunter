@@ -188,3 +188,18 @@ dependencies {
 ```
 
 </br>
+
+## Google AI API Key
+
+Google AI Studio is the fastest way to start building with Gemini, our next generation family of multimodal generative AI models. You can get api key from here: https://aistudio.google.com/apikey
+
+You can follow these photos for applying the key to your project:
+
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/user-attachments/assets/a6df9498-67ff-49c7-9e45-f3880d7d69c8">
+
+</p>
+<p align="center" width="100%">
+    <img width="100%" src="https://github.com/user-attachments/assets/22fc2c51-0be7-4cce-859a-4fe3ef0df456"> 
+</p>
+
