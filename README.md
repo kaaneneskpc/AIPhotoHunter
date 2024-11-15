@@ -4,17 +4,6 @@ AI Photo Hunter is an innovative mobile app that allows users to go photo huntin
 
 </br>
 
-## App Contents
-
-### English
-<img src="https://github.com/user-attachments/assets/6ad87077-9e40-4ffe-ada4-464955219b01" height = "400px"/><img src="https://github.com/user-attachments/assets/02d2ae58-e64f-4e73-8698-a46b3ed77ffb" height = "400px"/><img src="https://github.com/user-attachments/assets/2c8121e3-d818-4bc2-b1d9-450661c63dcf" height = "400px"/><img src="https://github.com/user-attachments/assets/6a182057-c79c-430a-978f-30d1444eceeb" height = "400px"/><img src="https://github.com/user-attachments/assets/9ab163e9-c33c-4ad9-a264-b3ea58673c32" height = "400px"/><img src="https://github.com/user-attachments/assets/6ede46bd-f7e3-4e82-9efe-1a2f7eba777d" height = "400px"/><img src="https://github.com/user-attachments/assets/b3f7803b-1a25-4abb-8a9e-d35078602473" height = "400px"/><img src="https://github.com/user-attachments/assets/b8e852ba-75e7-48ac-b24e-cb7598c2be4a" height = "400px"/><img src="https://github.com/user-attachments/assets/2b5506ae-abde-4dfd-bcc0-ca45ced6e174" height = "400px"/><img src="https://github.com/user-attachments/assets/fb874f12-7744-426d-8106-ffbc13c45454" height = "400px"/>
-
-
-### Turkish
-<img src="https://github.com/user-attachments/assets/eb79d566-ee13-4fbb-b463-0fe821b68ceb" height = "400px"/><img src="https://github.com/user-attachments/assets/8258b9b8-451e-4f53-958c-b39ed1f51a0f" height = "400px"/><img src="https://github.com/user-attachments/assets/ca630ed1-84fb-42b9-8662-fec8877b43ee" height = "400px"/><img src="https://github.com/user-attachments/assets/042f883f-4476-448e-8d22-0d907b1a6ca1" height = "400px"/><img src="https://github.com/user-attachments/assets/25a7b717-99e1-418a-9017-859afe93fcfa" height = "400px"/><img src="https://github.com/user-attachments/assets/33ade1b8-86f3-447a-b226-78e70d0e1f14" height = "400px"/><img src="https://github.com/user-attachments/assets/6fd5f80b-bf9d-48ac-9fdd-a1b5212c962a" height = "400px"/>
-
-</br>
-
 ## Features
 
 <li><strong>Multi-Language Support:</strong> Users can use the app in their own language.</li>
@@ -23,6 +12,17 @@ AI Photo Hunter is an innovative mobile app that allows users to go photo huntin
 <li><strong>User Friendly Interface:</strong> Easy to use with a modern and intuitive design.</li>
 <li><strong>AI-Powered Photo Analysis:</strong> Taken photos are analyzed and evaluated by artificial intelligence.</li>
 <li><strong>Sharing and Social Interaction:</strong> You can share your photos with the community and see what other users have shared.</li>
+
+</br>
+
+## App Contents
+
+### English
+<img src="https://github.com/user-attachments/assets/6ad87077-9e40-4ffe-ada4-464955219b01" height = "400px"/><img src="https://github.com/user-attachments/assets/02d2ae58-e64f-4e73-8698-a46b3ed77ffb" height = "400px"/><img src="https://github.com/user-attachments/assets/2c8121e3-d818-4bc2-b1d9-450661c63dcf" height = "400px"/><img src="https://github.com/user-attachments/assets/6a182057-c79c-430a-978f-30d1444eceeb" height = "400px"/><img src="https://github.com/user-attachments/assets/9ab163e9-c33c-4ad9-a264-b3ea58673c32" height = "400px"/><img src="https://github.com/user-attachments/assets/6ede46bd-f7e3-4e82-9efe-1a2f7eba777d" height = "400px"/><img src="https://github.com/user-attachments/assets/b3f7803b-1a25-4abb-8a9e-d35078602473" height = "400px"/><img src="https://github.com/user-attachments/assets/b8e852ba-75e7-48ac-b24e-cb7598c2be4a" height = "400px"/><img src="https://github.com/user-attachments/assets/2b5506ae-abde-4dfd-bcc0-ca45ced6e174" height = "400px"/><img src="https://github.com/user-attachments/assets/fb874f12-7744-426d-8106-ffbc13c45454" height = "400px"/>
+
+
+### Turkish
+<img src="https://github.com/user-attachments/assets/eb79d566-ee13-4fbb-b463-0fe821b68ceb" height = "400px"/><img src="https://github.com/user-attachments/assets/8258b9b8-451e-4f53-958c-b39ed1f51a0f" height = "400px"/><img src="https://github.com/user-attachments/assets/ca630ed1-84fb-42b9-8662-fec8877b43ee" height = "400px"/><img src="https://github.com/user-attachments/assets/042f883f-4476-448e-8d22-0d907b1a6ca1" height = "400px"/><img src="https://github.com/user-attachments/assets/25a7b717-99e1-418a-9017-859afe93fcfa" height = "400px"/><img src="https://github.com/user-attachments/assets/33ade1b8-86f3-447a-b226-78e70d0e1f14" height = "400px"/><img src="https://github.com/user-attachments/assets/6fd5f80b-bf9d-48ac-9fdd-a1b5212c962a" height = "400px"/>
 
 </br>
 
