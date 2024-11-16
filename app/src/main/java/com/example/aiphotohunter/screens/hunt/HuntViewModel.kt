@@ -322,17 +322,15 @@ class HuntViewModel @Inject constructor() : ViewModel() {
                     pickNextItem()
                 } else {
                     Log.e("HuntViewModel", "Failed to generate items: No items generated")
-                    // Handle the case where no items are generated
                     _currentItems.value = emptyList()
                     _itemsLeft.value = 0
                 }
             } catch (e: Exception) {
                 Log.e("HuntViewModel", "Error generating items", e)
-                // Handle the error appropriately
                 _currentItems.value = emptyList()
                 _itemsLeft.value = 0
             } finally {
-                _isLoading.value = false // Stop loading
+                _isLoading.value = false
             }
         }
     }

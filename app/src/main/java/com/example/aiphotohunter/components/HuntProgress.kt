@@ -39,7 +39,6 @@ fun HuntProgress(huntViewModel: HuntViewModel) {
 fun HuntProgressPreview() {
     val huntViewModel = HuntViewModel().apply {
         setSelectedLanguage("Türkçe")
-        // Initialize currentItems for testing
         _currentItems.value = List(10) { "Item ${it + 1}" }
         _score.value = 150
         _itemsLeft.value = 5
